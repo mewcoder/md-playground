@@ -4,7 +4,7 @@ import { downloadProject } from './download';
 // import Moon from './icons/Moon.vue';
 import Share from './icons/Share.vue';
 import Download from './icons/Download.vue';
-import GitHub from './icons/GitHub.vue';
+import Logo from './icons/Logo.vue';
 
 defineProps(['store']);
 
@@ -46,7 +46,7 @@ async function copyLink() {
       </button>
       <button title="View on GitHub" class="github">
         <a href="https://github.com/mewcoder/md-playground" target="_blank">
-          <GitHub />
+          <Logo />
         </a>
       </button>
     </div>

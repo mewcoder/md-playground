@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onMounted, reactive } from 'vue';
 import { debounce, render, utoa, atou } from '../utils';
+import { Editor, Viewer } from '@bytemd/vue-next';
 
 defineProps({
   msg: {
@@ -33,10 +34,14 @@ watch(
     history.replaceState({}, '', '#' + utoa(JSON.stringify(val)));
   }
 );
+
+function handleChange(v) {
+  mdStr.value = v;
+}
 </script>
 
 <template>
-  <div class="main">
+  <!-- <div class="main">
     <div class="editor">
       <textarea
         class="input"
@@ -47,8 +52,15 @@ watch(
       ></textarea>
     </div>
     <div ref="preiviewRef" class="preiview"></div>
-  </div>
+  </div> -->
+  <Editor :value="mdStr" @change="handleChange" />
 </template>
+
+<style>
+.bytemd {
+  height: 100% !important;
+}
+</style>
 
 <style scoped>
 .main {

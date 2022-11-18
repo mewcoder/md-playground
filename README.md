@@ -7,7 +7,6 @@
 
 - 支持在线分享的 markdown 编辑器
 
-## 感谢
 
-- [Vue SFC Playground](https://sfc.vuejs.org/)
-- [bytemd](https://github.com/bytedance/bytemd)
+
+- Power by  [bytemd](https://github.com/bytedance/bytemd), inspired by [Vue SFC Playground](https://sfc.vuejs.org/)

@@ -16,7 +16,7 @@ function parseUrl() {
     if (!url) return;
     if (url.startsWith(viewKey)) {
       preview.value = true;
-      url = url.slice(viewKey.length, url.length);
+      url = url.slice(viewKey.length);
     }
     const str = atou(url);
     mdStr.value = str;

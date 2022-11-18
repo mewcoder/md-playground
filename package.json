@@ -8,11 +8,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@bytemd/vue-next": "^1.17.4",
     "bytemd": "^1.17.4",
     "fflate": "^0.7.4",
-    "highlight.js": "^11.6.0",
-    "markdown-it": "^13.0.1",
     "vue": "^3.2.41"
   },
   "devDependencies": {

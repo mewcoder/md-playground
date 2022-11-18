@@ -1,6 +1,6 @@
 import { zlibSync, unzlibSync, strToU8, strFromU8 } from 'fflate';
-import MarkdownIt from 'markdown-it';
-import hljs from 'highlight.js';
+// import MarkdownIt from 'markdown-it';
+// import hljs from 'highlight.js';
 
 export function debounce(fn, n = 100) {
   let handle;
@@ -34,27 +34,27 @@ export function atou(base64) {
   return decodeURIComponent(escape(binary));
 }
 
-export function render(str) {
-  const md = new MarkdownIt({
-    html: true,
-    xhtmlOut: true,
-    breaks: true,
-    langPrefix: 'lang-',
-    highlight(str, lang) {
-      let code = '';
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          code = `<code class="hljs">${
-            hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
-          }</code>`;
-        } catch (error) {
-          code = `<pre class="hljs"><code>${md.utils.escapeHtml(
-            str
-          )}</code></pre>`;
-        }
-      }
-      return code;
-    },
-  });
-  return md.render(str);
-}
+// export function render(str) {
+//   const md = new MarkdownIt({
+//     html: true,
+//     xhtmlOut: true,
+//     breaks: true,
+//     langPrefix: 'lang-',
+//     highlight(str, lang) {
+//       let code = '';
+//       if (lang && hljs.getLanguage(lang)) {
+//         try {
+//           code = `<code class="hljs">${
+//             hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
+//           }</code>`;
+//         } catch (error) {
+//           code = `<pre class="hljs"><code>${md.utils.escapeHtml(
+//             str
+//           )}</code></pre>`;
+//         }
+//       }
+//       return code;
+//     },
+//   });
+//   return md.render(str);
+// }

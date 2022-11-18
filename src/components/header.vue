@@ -18,21 +18,22 @@ function toggleDark() {
 }
 
 async function copyLink() {
-  await navigator.clipboard.writeText(location.href);
+  const url = location.origin + '#_VIEW_' + location.hash.slice(1);
+  await navigator.clipboard.writeText(url);
   alert('Sharable URL has been copied to clipboard.');
 }
 </script>
 
 <template>
   <nav>
-    <h1>
-      <span>Markdown Playground</span>
-    </h1>
+    <div class="title">
+      <span>📝 MD Playground </span>
+    </div>
     <div class="links">
-      <button title="Toggle dark mode" class="toggle-dark" @click="toggleDark">
+      <!-- <button title="Toggle dark mode" class="toggle-dark" @click="toggleDark">
         <Sun class="light" />
         <Moon class="dark" />
-      </button>
+      </button> -->
       <button title="Copy sharable URL" class="share" @click="copyLink">
         <Share />
       </button>
@@ -84,14 +85,10 @@ nav {
   box-shadow: none;
   border-bottom: 1px solid var(--border);
 }
-h1 {
-  font-weight: 500;
-  display: inline-flex;
-  place-items: center;
-}
-h1 img {
-  height: 24px;
-  margin-right: 10px;
+.title {
+  font-weight: 800;
+  display: flex;
+  align-items: center;
 }
 @media (max-width: 560px) {
   h1 span {

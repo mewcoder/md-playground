@@ -1,89 +1,61 @@
 <script setup>
-import { ref, watch, onMounted, reactive } from 'vue';
-import { debounce, render, utoa, atou } from '../utils';
-import { Editor, Viewer } from '@bytemd/vue-next';
+import { ref } from 'vue';
+import { utoa, atou } from '../utils';
+import { Editor, Viewer } from './bytemd';
 
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
-});
+const mdStr = ref('');
+const preview = ref(false);
 
-const handleRender = debounce(str => {
-  preiviewRef.value.innerHTML = render(str);
-}, 500);
+const viewKey = '_VIEW_';
 
-let str = '';
-const mdStr = ref(str);
-try {
-  str = JSON.parse(atou(location.hash.slice(1)));
-  handleRender(str);
-} catch (err) {
-  console.log(err);
+parseUrl();
+
+function parseUrl() {
+  try {
+    let url = location.hash.slice(1);
+    if (!url) return;
+    if (url.startsWith(viewKey)) {
+      preview.value = true;
+      url = url.slice(viewKey.length, url.length - 1);
+    }
+    const str = JSON.parse(atou(url));
+    mdStr.value = str;
+  } catch (err) {
+    console.warn(err);
+  }
 }
 
-mdStr.value = str;
-
-const preiviewRef = ref(null);
-
-watch(
-  () => mdStr.value,
-  val => {
-    handleRender(val);
-    history.replaceState({}, '', '#' + utoa(JSON.stringify(val)));
-  }
-);
-
-function handleChange(v) {
-  mdStr.value = v;
+function handleChange(val) {
+  mdStr.value = val;
+  history.replaceState({}, '', '#' + utoa(JSON.stringify(val)));
 }
 </script>
 
 <template>
-  <!-- <div class="main">
-    <div class="editor">
-      <textarea
-        class="input"
-        v-model="mdStr"
-        autocomplete="false"
-        spellcheck="false"
-        @input="handleMDChange"
-      ></textarea>
-    </div>
-    <div ref="preiviewRef" class="preiview"></div>
-  </div> -->
-  <Editor :value="mdStr" @change="handleChange" />
+  <div v-if="preview" class="view-body">
+    <Viewer class="viewer" :value="mdStr" />
+  </div>
+  <div v-else class="edit-body">
+    <Editor :value="mdStr" mode="auto" @change="handleChange" />
+  </div>
 </template>
 
 <style>
-.bytemd {
-  height: 100% !important;
+.edit-body {
+  background: #fff;
+  height: 100%;
 }
-</style>
-
-<style scoped>
-.main {
-  display: flex;
-}
-.editor {
-  width: 49%;
-  box-sizing: border-box;
-}
-.input {
-  font-size: 16px;
-  resize: none;
-  border: none;
-  outline: none;
-  width: 100%;
+.view-body {
+  background: #f2f3f5;
   height: 100%;
   overflow: auto;
 }
-
-.preiview {
-  margin-left: 20px;
-  flex: 1;
-  height: 100%;
-  overflow: auto;
+.viewer {
+  max-width: 820px;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 4px;
+  background: #fff;
 }
 </style>

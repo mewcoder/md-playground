@@ -1,21 +1,21 @@
 <script setup>
 import { downloadProject } from './download';
-import Sun from './icons/Sun.vue';
-import Moon from './icons/Moon.vue';
+// import Sun from './icons/Sun.vue';
+// import Moon from './icons/Moon.vue';
 import Share from './icons/Share.vue';
 import Download from './icons/Download.vue';
 import GitHub from './icons/GitHub.vue';
 
 defineProps(['store']);
 
-function toggleDark() {
-  const cls = document.documentElement.classList;
-  cls.toggle('dark');
-  localStorage.setItem(
-    'vue-sfc-playground-prefer-dark',
-    String(cls.contains('dark'))
-  );
-}
+// function toggleDark() {
+//   const cls = document.documentElement.classList;
+//   cls.toggle('dark');
+//   localStorage.setItem(
+//     'vue-sfc-playground-prefer-dark',
+//     String(cls.contains('dark'))
+//   );
+// }
 
 async function copyLink() {
   const url = location.origin + '#_VIEW_' + location.hash.slice(1);
@@ -45,10 +45,7 @@ async function copyLink() {
         <Download />
       </button>
       <button title="View on GitHub" class="github">
-        <a
-          href="https://github.com/vuejs/core/tree/main/packages/sfc-playground"
-          target="_blank"
-        >
+        <a href="https://github.com/mewcoder/md-playground" target="_blank">
           <GitHub />
         </a>
       </button>

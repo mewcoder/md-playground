@@ -18,7 +18,8 @@ defineProps(['store']);
 // }
 
 async function copyLink() {
-  const url = location.origin + '#_VIEW_' + location.hash.slice(1);
+  const url =
+    location.origin + location.pathname + '#_VIEW_' + location.hash.slice(1);
   await navigator.clipboard.writeText(url);
   alert('Sharable URL has been copied to clipboard.');
 }

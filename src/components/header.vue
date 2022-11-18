@@ -6,8 +6,6 @@ import Share from './icons/Share.vue';
 import Download from './icons/Download.vue';
 import Logo from './icons/Logo.vue';
 
-defineProps(['store']);
-
 // function toggleDark() {
 //   const cls = document.documentElement.classList;
 //   cls.toggle('dark');
@@ -19,7 +17,7 @@ defineProps(['store']);
 
 async function copyLink() {
   const url =
-    location.origin + location.pathname + '#_VIEW_' + location.hash.slice(1);
+    location.origin + location.pathname + '#__VIEW__' + location.hash.slice(1);
   await navigator.clipboard.writeText(url);
   alert('Sharable URL has been copied to clipboard.');
 }
@@ -69,7 +67,6 @@ nav {
   background-color: var(--bg);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.33);
   position: relative;
-  z-index: 999;
   display: flex;
   justify-content: space-between;
 }

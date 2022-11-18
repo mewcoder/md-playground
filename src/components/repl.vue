@@ -6,7 +6,7 @@ import { Editor, Viewer } from './bytemd';
 const mdStr = ref('');
 const preview = ref(false);
 
-const viewKey = '_VIEW_';
+const viewKey = '__VIEW__';
 
 parseUrl();
 
@@ -16,9 +16,9 @@ function parseUrl() {
     if (!url) return;
     if (url.startsWith(viewKey)) {
       preview.value = true;
-      url = url.slice(viewKey.length, url.length - 1);
+      url = url.slice(viewKey.length, url.length);
     }
-    const str = JSON.parse(atou(url));
+    const str = atou(url);
     mdStr.value = str;
   } catch (err) {
     console.warn(err);
@@ -27,7 +27,7 @@ function parseUrl() {
 
 function handleChange(val) {
   mdStr.value = val;
-  history.replaceState({}, '', '#' + utoa(JSON.stringify(val)));
+  history.replaceState({}, '', '#' + utoa(val));
 }
 </script>
 
